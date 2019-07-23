@@ -4,7 +4,6 @@ import musicstore.enums.Builder;
 import musicstore.enums.Type;
 import musicstore.enums.Wood;
 
-import java.util.Collections;
 import java.util.List;
 
 public class FindGuitarTester {
@@ -12,17 +11,18 @@ public class FindGuitarTester {
 		Inventory inventory = new Inventory();
 		initializeInventory(inventory);
 
-		Guitar whatErinLikes = new Guitar("", 0, Builder.FENDER, "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+		GuitarSpec whatErinLikes = new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
 		List<Guitar> guitars = inventory.search(whatErinLikes);
 
 		if (!guitars.isEmpty()) {
 			for (Guitar guitar : guitars) {
 				if (guitar != null) {
+					GuitarSpec guitarSpec = guitar.getGuitarSpec();
 					System.out.println("Erin, you might like this " +
-						guitar.getBuilder() + " " + guitar.getModel() + " " +
-						guitar.getType() + " guitar:\n	" +
-						guitar.getBackWood() + " back and sides,\n	" +
-						guitar.getTopWood() + " top. \nYou can have it for only $" +
+						guitarSpec.getBuilder() + " " + guitarSpec.getModel() + " " +
+						guitarSpec.getType() + " guitar:\n	" +
+						guitarSpec.getBackWood() + " back and sides,\n	" +
+						guitarSpec.getTopWood() + " top. \nYou can have it for only $" +
 						guitar.getPrice() + "!\n-----");
 				}
 			}
