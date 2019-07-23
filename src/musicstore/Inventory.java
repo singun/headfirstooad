@@ -1,11 +1,15 @@
 package musicstore;
 
+import musicstore.enums.Builder;
+import musicstore.enums.Type;
+import musicstore.enums.Wood;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Inventory {
-	private List guitarList;
+	private List<Guitar> guitarList;
 
 	public Inventory() {
 		this.guitarList = new LinkedList();
@@ -15,8 +19,8 @@ public class Inventory {
 		this.guitarList = guitarList;
 	}
 
-	public void addGuitar(String serialNumber, double price, String builder, String model, String type, String backWood,
-		String topWood) {
+	public void addGuitar(String serialNumber, double price, Builder builder, String model, Type type, Wood backWood,
+		Wood topWood) {
 		Guitar guitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
 		guitarList.add(guitar);
 	}
@@ -28,6 +32,7 @@ public class Inventory {
 				return guitar;
 			}
 		}
+
 		return null;
 	}
 
@@ -35,25 +40,24 @@ public class Inventory {
 		for (Iterator i = guitarList.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar) i.next();
 
-			String builder = searchGuitar.getBuilder();
-			if ((builder != null) && (!builder.equals("")) && (!builder.equals(guitar.getBuilder())))
+			if (guitar.getBuilder() != searchGuitar.getBuilder())
 				continue;
 
 			String model = searchGuitar.getModel();
-			if ((model != null) && (!model.equals("")) && (!model.equals(guitar.getModel())))
+			if ((model != null) && (!model.equals("")) &&
+				(!model.toLowerCase().equals(guitar.getModel().toLowerCase())))
 				continue;
 
-			String type = searchGuitar.getType();
-			if ((type != null) && (!type.equals("")) && (!type.equals(guitar.getType())))
+			if (guitar.getType() != searchGuitar.getType())
 				continue;
 
-			String backWood = searchGuitar.getBackWood();
-			if ((backWood != null) && (!backWood.equals("")) && (!backWood.equals(searchGuitar.getBackWood())))
+			if (guitar.getBackWood() != searchGuitar.getBackWood())
 				continue;
 
-			String topWood = searchGuitar.getTopWood();
-			if ((topWood != null) && (!topWood.equals("")) && (!topWood.equals(searchGuitar.getTopWood())))
+			if (guitar.getTopWood() != searchGuitar.getTopWood())
 				continue;
+
+			return guitar;
 		}
 		return null;
 	}
