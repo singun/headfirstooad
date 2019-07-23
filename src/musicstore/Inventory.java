@@ -4,6 +4,7 @@ import musicstore.enums.Builder;
 import musicstore.enums.Type;
 import musicstore.enums.Wood;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +37,8 @@ public class Inventory {
 		return null;
 	}
 
-	public Guitar search(Guitar searchGuitar) {
+	public List<Guitar> search(Guitar searchGuitar) {
+		List<Guitar> searched = new ArrayList<>();
 		for (Iterator i = guitarList.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar) i.next();
 
@@ -57,8 +59,8 @@ public class Inventory {
 			if (guitar.getTopWood() != searchGuitar.getTopWood())
 				continue;
 
-			return guitar;
+			searched.add(guitar);
 		}
-		return null;
+		return searched;
 	}
 }
